@@ -1,0 +1,27 @@
+services:
+  script:
+    build:
+      context: ../script
+      dockerfile: script.lab.Dockerfile
+    container_name: sentifeel-lab-script
+    networks:
+      - sentifeel-lab
+    stdin_open: true
+    tty: true
+    volumes:
+      - type: bind
+        source: ../script
+        target: /app
+      - type: volume
+        source: sentifeel-lab-pycache
+        target: /app/__pycache__
+      - type: volume
+        source: sentifeel-lab-intermediate
+        target: /app/intermediate
+
+networks:
+  sentifeel-lab:
+
+volumes:
+  sentifeel-lab-pycache:
+  sentifeel-lab-intermediate:
