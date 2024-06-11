@@ -4,6 +4,8 @@ services:
       context: ../script
       dockerfile: script.lab.Dockerfile
     container_name: sentifeel-lab-script
+    env_file:
+      - .env
     networks:
       - sentifeel-lab
     stdin_open: true
