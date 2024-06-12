@@ -1,3 +1,5 @@
+name: sentifeel-lab
+
 services:
   script:
     build:
