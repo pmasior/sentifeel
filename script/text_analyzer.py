@@ -2,16 +2,16 @@ from azure_connector import (
     get_text_analytics_client,
     get_multiple_text_analytics_actions,
 )
+from type_defs import Documents
 
 
-def analyze_text():
+def analyze_texts(documents: Documents):
     client = get_text_analytics_client()
     poller = client.begin_analyze_actions(
-        ["I like apples so much"], actions=get_multiple_text_analytics_actions()
+        documents, actions=get_multiple_text_analytics_actions()
     )
     result = poller.result()
-    # for
-    print(list(result))
+    return result
 
 
 if __name__ == "__main__":
