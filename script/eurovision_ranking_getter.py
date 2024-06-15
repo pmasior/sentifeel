@@ -1,64 +1,56 @@
-import json
-from bs4 import BeautifulSoup
-
+import env_variables_handler
+import eurovision_ranking_parser
 import intermediate_files_handler
 import webpage_downloader
 
 
-def download_ranking_from_eurovision(year, directory):
-    return webpage_downloader.download_webpage_in_headless_browser(
-        f"https://eurovisionworld.com/eurovision/{year}", directory, f"{year}.html"
-    )
-
-
-def parse_ranking_from_eurovision_html(html_content_path, directory, filestem):
-    with open(html_content_path, "r") as file:
-        html_content = file.read()
-    soup = BeautifulSoup(html_content, "lxml")
-    table_body_element = soup.select_one(".v_table tbody")
-    data = {}
-    data[filestem] = []
-    for row in table_body_element.select("tr"):
-        place = row.select_one("b").text
-        country_code = row["id"][-2:]
-        title = row.select("td")[2].select_one("a").contents[0].strip()
-        author = row.select("td")[2].select_one("span").text
-        data[filestem].append(
-            {
-                "place": place,
-                "country_code": country_code,
-                "title": title,
-                "author": author,
-            }
+def _download_conditionally(year):
+    def _download_and_save_ranking_from_eurovision(year):
+        html_content = webpage_downloader.download_webpage_in_headless_browser(
+            f"https://eurovisionworld.com/eurovision/{year}"
         )
-    ranking_path = directory / f"{filestem}.json"
-    with open(ranking_path, "w") as file:
-        json.dump(data, file, ensure_ascii=False, indent=4)
-    return ranking_path
+        intermediate_files_handler.save_to_intermediate_directory(
+            html_content, "3_download_ranking", year, "html"
+        )
+        return html_content
 
+    def _get_ranking_from_intermediate_files(year):
+        return intermediate_files_handler.open_from_intermediate_directory(
+            "3_download_ranking", year, "html"
+        )
 
-def get_ranking(year):
-    download_ranking_directory = intermediate_files_handler.make_intermediate_directory(
-        "3_download_ranking"
+    is_allowing_connect = env_variables_handler.get_boolean_env_variable(
+        "ALLOW_CONNECT_TO_EUROVISIONWORLD_COM"
     )
-    ranking_directory = intermediate_files_handler.make_intermediate_directory(
-        "4_ranking"
-    )
-
-    # TODO: Add variable to determine if we should download the ranking or use
-    # TODO: existing file and should download missing rankongs or not connect to
-    # TODO: website
-    # html_content_path = download_ranking_from_eurovision(
-    #     year, download_ranking_directory
-    # )
-    html_content_path = download_ranking_directory / f"{year}.html"
-    ranking_path = parse_ranking_from_eurovision_html(
-        html_content_path, ranking_directory, year
+    is_downloaded = intermediate_files_handler.check_existence_of_file(
+        "3_download_ranking", year, "html"
     )
 
-    return ranking_path
+    if is_downloaded:
+        return _get_ranking_from_intermediate_files(year)
+    else:
+        if is_allowing_connect:
+            return _download_and_save_ranking_from_eurovision(year)
+        else:
+            raise FileNotFoundError(f"Missing data for {year}")
+
+
+def _parse_and_save_ranking_from_eurovision(html_content, year):
+    ranking = eurovision_ranking_parser.parse_ranking_from_eurovision_html(html_content)
+    intermediate_files_handler.save_to_intermediate_directory(
+        ranking, "4_ranking", year, "json"
+    )
+    return ranking
+
+
+def get_eurovision_ranking(year):
+    intermediate_files_handler.make_intermediate_directory("3_download_ranking")
+    intermediate_files_handler.make_intermediate_directory("4_ranking")
+
+    html_content = _download_conditionally(year)
+    ranking = _parse_and_save_ranking_from_eurovision(html_content, year)
+    return ranking
 
 
 if __name__ == "__main__":
-    ranking_path = get_ranking("2024")
-    # pass
+    pass
