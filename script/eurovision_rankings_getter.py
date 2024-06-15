@@ -6,7 +6,7 @@ def get_eurovision_rankings():
     intermediate_files_handler.make_intermediate_directory("6_rankings")
 
     eurovision_rankings = {}
-    for year in range(2024, 2025):  # TODO: for year in range(2021, 2024):
+    for year in range(2021, 2025):  # TODO: for year in range(2021, 2024):
         ranking_content = eurovision_ranking_getter.get_eurovision_ranking(year)
         eurovision_rankings[year] = ranking_content
     intermediate_files_handler.save_to_intermediate_directory(

@@ -1,40 +1,31 @@
 from bs4 import BeautifulSoup
 
 import intermediate_files_handler
-import webpage_downloader
+import lyrics_id_creator
+from lyrics_conditional_downloader import download_lyrics_conditionally
 
 
-def download_lyrics_from_tekstowo(url, directory, filestem):
-    return webpage_downloader.download_webpage(url, directory, f"{filestem}.html")
-
-
-def parse_lyrics_from_tekstowo_html(html_content_path, directory, filestem):
-    with open(html_content_path, "r") as file:
-        html_content = file.read()
+def parse_lyrics_from_tekstowo_html(html_content, directory, filestem):
     soup = BeautifulSoup(html_content, "lxml")
     selected_element = soup.select_one(".song-text .inner-text")
-    lyrics_path = directory / f"{filestem}.txt"
-    with open(lyrics_path, "w") as file:
-        file.write(selected_element.text)
-    return lyrics_path
+    lyrics = selected_element.text
+    intermediate_files_handler.save_to_intermediate_directory(
+        lyrics, directory, filestem, "txt"
+    )
+    return lyrics
 
 
-def get_lyrics(artist_and_title, url):
-    download_directory = intermediate_files_handler.make_intermediate_directory(
-        "1_download"
-    )
-    lyrics_directory = intermediate_files_handler.make_intermediate_directory(
-        "2_lyrics"
-    )
+def get_lyrics(author, title):
+    intermediate_files_handler.make_intermediate_directory("9_html_lyrics")
+    intermediate_files_handler.make_intermediate_directory("a_lyrics")
 
-    html_content_path = download_lyrics_from_tekstowo(
-        url, download_directory, artist_and_title
+    song_id = lyrics_id_creator.convert_author_and_title_to_tekstowo_id(author, title)
+    html_content = download_lyrics_conditionally(
+        "9_html_lyrics", author, title, song_id
     )
-    lyrics_path = parse_lyrics_from_tekstowo_html(
-        html_content_path, lyrics_directory, artist_and_title
-    )
+    lyrics = parse_lyrics_from_tekstowo_html(html_content, "a_lyrics", song_id)
 
-    return lyrics_path
+    return lyrics
 
 
 if __name__ == "__main__":
