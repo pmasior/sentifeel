@@ -60,5 +60,5 @@ def get_ranking(year):
 
 
 if __name__ == "__main__":
-    get_ranking("2024")
+    ranking_path = get_ranking("2024")
     # pass
