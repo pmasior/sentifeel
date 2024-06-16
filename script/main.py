@@ -6,11 +6,16 @@ import lyrics_getter
 import sentiment_analyzer
 import text_analyzer
 import eurovision_rankings_getter
+import lyrics_analyzer
 import playlists_lyrics_getter
 
 if __name__ == "__main__":
     eurovision_rankings = eurovision_rankings_getter.get_eurovision_rankings()
-    playlists_lyrics_getter.get_playlists_lyrics(eurovision_rankings, "eurovision")
+    playlists_with_lyrics = playlists_lyrics_getter.get_playlists_lyrics(
+        eurovision_rankings, "eurovision"
+    )
+    lyrics_analyzer.get_playlists_analysis(playlists_with_lyrics, "eurovision")
+
     # lyrics_getter.get_lyrics(
     #     "Alessandra", "Queen of Kings", "alessandra,queen_of_kings"
     # )
