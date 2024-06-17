@@ -2,7 +2,7 @@ import requests
 from selenium import webdriver
 from selenium.webdriver.firefox.options import Options
 
-import terminal_printer
+from io_helper import terminal_printer
 
 
 def download_webpage(url):

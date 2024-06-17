@@ -1,4 +1,4 @@
-import webpage_downloader
+from webpage_downloader import webpage_downloader
 
 
 def download_ranking_from_eurovision(year):

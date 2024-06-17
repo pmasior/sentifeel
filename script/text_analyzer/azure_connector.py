@@ -1,7 +1,4 @@
-import os
-
-import env_variables_handler
-
+from azure.core.credentials import AzureKeyCredential
 from azure.ai.textanalytics import (
     TextAnalyticsClient,
     RecognizeEntitiesAction,
@@ -10,17 +7,16 @@ from azure.ai.textanalytics import (
     ExtractKeyPhrasesAction,
     AnalyzeSentimentAction,
 )
-from azure.core.credentials import AzureKeyCredential
+
+from io_helper import env_helper
 
 
 def _get_azure_endpoint():
-    return env_variables_handler.get_env_variable_or_throw("AZURE_ENDPOINT")
+    return env_helper.get_env_variable_or_throw("AZURE_ENDPOINT")
 
 
 def _get_azure_key():
-    return AzureKeyCredential(
-        env_variables_handler.get_env_variable_or_throw("AZURE_KEY")
-    )
+    return AzureKeyCredential(env_helper.get_env_variable_or_throw("AZURE_KEY"))
 
 
 def get_text_analytics_client():

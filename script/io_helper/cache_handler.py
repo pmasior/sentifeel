@@ -3,7 +3,7 @@ import json
 import os
 from pathlib import Path
 
-import terminal_printer
+from io_helper import terminal_printer
 
 
 def _get_current_datetime():
@@ -37,7 +37,12 @@ def check_existence_of_file(label, filestem, file_extension):
 def open_from_intermediate_directory(label, filestem, file_extension):
     path = _get_intermediate_file_path(label, filestem, file_extension)
     with open(path, "r", encoding="utf-8") as file:
-        content = file.read()
+        if file_extension == "json":
+            terminal_printer.verbose_print(f"Opening {path}")
+            content = json.load(file)
+        else:
+            terminal_printer.verbose_print(f"Opening {path}")
+            content = file.read()
     return content
 
 
