@@ -54,31 +54,5 @@ def cache_or_update(func, label, filestem, file_extension, env_variable_name):
     return wrapper_cache_or_update
 
 
-# def cache(label, filestem, file_extension):
-#     def decorator_cache(func):
-#         @functools.wraps(func)
-#         def wrapper_cache(*args, **kwargs):
-#             cache_handler.make_intermediate_directory(label)
-#             is_cached = cache_handler.check_existance_of_file(
-#                 label, filestem, file_extension
-#             )
-#             if is_cached:
-#                 return cache_handler.open_from_intermediate_directory(
-#                     label, filestem, file_extension
-#                 )
-#             else:
-#                 # before
-#                 value = func(*args, **kwargs)
-#                 cache_handler.save_to_intermediate_directory(
-#                     value, label, filestem, file_extension
-#                 )
-#                 # after
-#             return value
-
-#         return wrapper_cache
-
-#     return decorator_cache
-
-
 if __name__ == "__main__":
     pass

@@ -12,11 +12,13 @@ from io_helper import env_helper
 
 
 def _get_azure_endpoint():
-    return env_helper.get_env_variable_or_throw("AZURE_ENDPOINT")
+    return env_helper.get_env_variable_or_throw("AZURE_LANGUAGE_ENDPOINT")
 
 
 def _get_azure_key():
-    return AzureKeyCredential(env_helper.get_env_variable_or_throw("AZURE_KEY"))
+    return AzureKeyCredential(
+        env_helper.get_env_variable_or_throw("AZURE_LANGUAGE_KEY")
+    )
 
 
 def get_text_analytics_client():
