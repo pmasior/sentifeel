@@ -38,6 +38,7 @@ def parse_text_analysis_result(poller_results):
                             "subcategory": e.subcategory,
                             "length": e.length,
                             "offset": e.offset,
+                            "text": e.text,
                         }
                         for e in action_result.entities
                     ],
