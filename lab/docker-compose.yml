@@ -38,6 +38,9 @@ services:
         source: sentifeel-lab-pycache-text_translator
         target: /app/text_translator/__pycache__
       - type: volume
+        source: sentifeel-lab-pycache-visualizer
+        target: /app/visualizer/__pycache__
+      - type: volume
         source: sentifeel-lab-pycache-webpage_downloader
         target: /app/webpage_downloader/__pycache__
       - type: volume
@@ -55,5 +58,6 @@ volumes:
   sentifeel-lab-pycache-tekstowo_getter:
   sentifeel-lab-pycache-text_analyzer:
   sentifeel-lab-pycache-text_translator:
+  sentifeel-lab-pycache-visualizer:
   sentifeel-lab-pycache-webpage_downloader:
   sentifeel-lab-intermediate:
