@@ -3,7 +3,7 @@ import pandas as pd
 from . import _data_getter
 
 
-def plot_eurovision_average_sentiment_by_year():
+def plot_average_sentiment_for_keywords():
     def prepare_data():
         all_data = _data_getter.get_data()
         plot_rows = []
@@ -13,22 +13,29 @@ def plot_eurovision_average_sentiment_by_year():
                 sentiment_score = (sentiment_scores["positive"] * 1) + (
                     sentiment_scores["negative"] * -1
                 )
-                plot_rows.append(
-                    {
-                        "year": playlist_name,
-                        "sentiment_score": sentiment_score,
-                    }
-                )
+                for key_phrase in song["key_phrases_recognition"]["key_phrases"]:
+                    plot_rows.append(
+                        {
+                            "year": playlist_name,
+                            "key_phrase": key_phrase,
+                            "sentiment_score": sentiment_score,
+                        }
+                    )
         return pd.DataFrame(plot_rows)
 
     def create_pivot_table(plot_data):
         return pd.pivot_table(
             plot_data,
-            index="year",
+            index="key_phrase",
+            columns="year",
             values="sentiment_score",
             aggfunc="mean",
         )
 
+    def filter_pivot_table(plot_data, indexes_to_filter):
+        return plot_data.loc[indexes_to_filter]
+
     plot_data = prepare_data()
     plot_data = create_pivot_table(plot_data)
+    plot_data = filter_pivot_table(plot_data, ["heart", "love", "world"])
     return plot_data

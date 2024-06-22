@@ -11,7 +11,7 @@ def plot_eurovision_average_sentiment_by_country():
         plot_rows = []
         for playlist_name, playlist in all_data.items():
             for song in playlist:
-                sentiment_scores = song["sentiment_analysis"]["configence_score"]
+                sentiment_scores = song["sentiment_analysis"]["confidence_scores"]
                 sentiment_score = (sentiment_scores["positive"] * 1) + (
                     sentiment_scores["negative"] * -1
                 )
