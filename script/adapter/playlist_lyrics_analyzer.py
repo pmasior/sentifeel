@@ -48,8 +48,10 @@ def _get_playlist_analysis(playlist: PlaylistWithLyrics) -> PlaylistWithAnalysis
 
 def _get_playlists_analysis(playlists: PlaylistsWithLyrics) -> PlaylistsWithAnalysis:
     playlists_with_analysis = {}
-    for playlist in playlists:
-        playlists_with_analysis[playlist] = get_playlist_analysis(playlists[playlist])
+    for playlist_name, playlist in playlists.items():
+        playlists_with_analysis[playlist_name] = get_playlist_analysis(
+            playlist, playlist_name
+        )
     return playlists_with_analysis
 
 
