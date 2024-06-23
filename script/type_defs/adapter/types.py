@@ -65,7 +65,7 @@ class ItemWithAnalysis(TypedDict):
     author: str
     country_code: str
     entities_recognition: RecognizeEntitiesParsed
-    key_phrases_recognition: ExtractKeyPhrasesParsed |
+    key_phrases_recognition: ExtractKeyPhrasesParsed
     linked_entities_recognition: RecognizeLinkedEntitiesParsed
     id: str
     pii_entities_recognition: RecognizePiiEntitiesParsed
