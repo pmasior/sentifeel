@@ -1,11 +1,12 @@
+import matplotlib.pyplot as plt
 import pandas as pd
 
 from . import _data_getter
 
 
-def plot_average_sentiment_for_keywords():
+def get_data_for_average_sentiment_for_keywords():
     def prepare_data():
-        all_data = _data_getter.get_data()
+        all_data = _data_getter._get_data()
         plot_rows = []
         for playlist_name, playlist in all_data.items():
             for song in playlist:
@@ -39,3 +40,21 @@ def plot_average_sentiment_for_keywords():
     plot_data = create_pivot_table(plot_data)
     plot_data = filter_pivot_table(plot_data, ["heart", "love", "world"])
     return plot_data
+
+
+def _plot_average_sentiment_for_keywords(plot_data):
+    plot_data.plot(kind="bar")
+    plt.title("Average sentiment score for keywords in Eurovision songs over years")
+    plt.xlabel("Year")
+    plt.ylabel("Average sentiment score")
+    plt.legend(title="Keywords")
+    return plt.show()
+
+
+def plot_average_sentiment_for_keywords():
+    plot_data = get_data_for_average_sentiment_for_keywords()
+    return _plot_average_sentiment_for_keywords(plot_data)
+
+
+if __name__ == "__main__":
+    pass

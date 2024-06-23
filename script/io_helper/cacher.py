@@ -26,6 +26,24 @@ def cache2(func, label, filestem, file_extension):
     return wrapper_cache2
 
 
+def cache3(func, label, filestem, file_extension):
+    def wrapper_cache3(*args, **kwargs):
+        cache_handler.make_intermediate_directory(label)
+        is_cached = cache_handler.check_existence_of_file(
+            label, filestem, file_extension
+        )
+        if is_cached:
+            return cache_handler._get_intermediate_file_path(
+                label, filestem, file_extension
+            )
+        else:
+            # before
+            return func(*args, **kwargs)
+            # after
+
+    return wrapper_cache3
+
+
 def cache_or_update(func, label, filestem, file_extension, env_variable_name):
     def wrapper_cache_or_update(*args, **kwargs):
         cache_handler.make_intermediate_directory(label)

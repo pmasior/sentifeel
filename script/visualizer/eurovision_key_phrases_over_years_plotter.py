@@ -1,11 +1,12 @@
+import matplotlib.pyplot as plt
 import pandas as pd
 
 from . import _data_getter
 
 
-def plot_key_phrases_over_years():
+def get_data_for_key_phrases_over_years():
     def prepare_data():
-        all_data = _data_getter.get_data()
+        all_data = _data_getter._get_data()
         plot_rows = []
         for playlist_name, playlist in all_data.items():
             for song in playlist:
@@ -48,3 +49,22 @@ def plot_key_phrases_over_years():
     plot_data = filter_pivot_table(plot_data)
     plot_data = sort_pivot_table(plot_data)
     return plot_data
+
+
+def _plot_key_phrases_over_years(plot_data):
+    plot_data.plot(kind="bar")
+    plt.title("Frequency of key phrases in Eurovision songs over years")
+    plt.xlabel("Key phrase")
+    plt.ylabel("Frequency of key phrases")
+    plt.xticks(rotation=45)
+    plt.legend(title="Year")
+    return plt.show()
+
+
+def plot_key_phrases_over_years():
+    plot_data = get_data_for_key_phrases_over_years()
+    return _plot_key_phrases_over_years(plot_data)
+
+
+if __name__ == "__main__":
+    pass
