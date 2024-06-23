@@ -8,7 +8,10 @@ def _get_eurovision_rankings() -> Playlists:
     eurovision_rankings = {}
     start_year = env_helper.get_int_env_variable("EUROVISION_START_YEAR")
     end_year = env_helper.get_int_env_variable("EUROVISION_END_YEAR")
+    years_to_ignore = {2020}
     for year in range(start_year, end_year):
+        if year in years_to_ignore:
+            continue
         ranking_content = eurovision_ranking_getter.get_eurovision_ranking(year)
         eurovision_rankings[str(year)] = ranking_content
     return eurovision_rankings
