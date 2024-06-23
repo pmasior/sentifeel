@@ -1,3 +1,4 @@
+from intermediate_constants import constants
 from io_helper import cacher, cache_handler
 from text_analyzer import text_analyzer
 from . import text_analysis_result_parser
@@ -13,7 +14,7 @@ def _get_playlist_analysis(playlist):
     songs_to_analyze = []
     for song in playlist:
         lyrics = cache_handler.open_from_intermediate_directory(
-            "_4_tekstowo_txt", song["song_id"], "txt"
+            constants.I5_TEKSTOWO_TXT, song["song_id"], "txt"
         )
         songs_to_analyze.append({"id": song["song_id"], "text": lyrics})
     songs_with_analysis_not_parsed = text_analyzer.analyze_texts(songs_to_analyze)
@@ -43,7 +44,7 @@ def _get_playlists_analysis(playlists):
 def get_playlist_analysis(playlist, playlist_name):
     return cacher.cache2(
         _get_playlist_analysis,
-        "_8_playlistanalysis_json",
+        constants.IB_PLAYLIST_WITH_ANALYSIS,
         playlist_name,
         "json",
     )(playlist)
@@ -52,7 +53,7 @@ def get_playlist_analysis(playlist, playlist_name):
 def get_playlists_analysis(playlists, playlists_name):
     return cacher.cache2(
         _get_playlists_analysis,
-        "_9_playlists_analysis_json",
+        constants.IC_PLAYLISTS_WITH_ANALYSIS,
         playlists_name,
         "json",
     )(playlists)

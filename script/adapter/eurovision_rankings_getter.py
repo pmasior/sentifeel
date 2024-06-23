@@ -1,4 +1,5 @@
 from eurovision_getter import eurovision_ranking_getter
+from intermediate_constants import constants
 from io_helper import cacher
 
 
@@ -13,7 +14,7 @@ def _get_eurovision_rankings():
 def get_eurovision_rankings():
     return cacher.cache2(
         _get_eurovision_rankings,
-        "_5_eurovisions_json",
+        constants.I3_PLAYLISTS_EUROVISION,
         "eurovisions",
         "json",
     )()

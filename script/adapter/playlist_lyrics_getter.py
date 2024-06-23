@@ -1,3 +1,4 @@
+from intermediate_constants import constants
 from io_helper import cacher
 from tekstowo_getter import lyrics_getter
 
@@ -25,7 +26,7 @@ def _get_playlists_lyrics(playlists):
 def get_playlist_lyrics(playlist, playlist_name):
     return cacher.cache2(
         _get_playlist_lyrics,
-        "_6_playlist_json",
+        constants.I6_PLAYLIST_WITH_LYRICS,
         playlist_name,
         "json",
     )(playlist)
@@ -34,7 +35,7 @@ def get_playlist_lyrics(playlist, playlist_name):
 def get_playlists_lyrics(playlists, playlists_name):
     return cacher.cache2(
         _get_playlists_lyrics,
-        "_7_playlists_json",
+        constants.I7_PLAYLISTS_WITH_LYRICS,
         playlists_name,
         "json",
     )(playlists)

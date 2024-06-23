@@ -1,11 +1,12 @@
 from eurovision_getter import _eurovision_ranking_downloader, _eurovision_ranking_parser
+from intermediate_constants import constants
 from io_helper import cacher
 
 
 def get_eurovision_ranking(year):
     html_content = cacher.cache_or_update(
         _eurovision_ranking_downloader.download_ranking_from_eurovision,
-        "_1_eurovision_html",
+        constants.I1_EUROVISION_HTML,
         year,
         "html",
         "ALLOW_CONNECT_TO_EUROVISIONWORLD_COM",
@@ -13,7 +14,7 @@ def get_eurovision_ranking(year):
 
     ranking = cacher.cache2(
         _eurovision_ranking_parser.parse_ranking_from_eurovision_html,
-        "_2_ranking_json",
+        constants.I2_PLAYLIST_EUROVISION,
         year,
         "json",
     )(html_content)

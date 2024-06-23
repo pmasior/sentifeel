@@ -58,3 +58,7 @@ country_code_map = {
     "UA": "UKR",
     "VA": "VAT",
 }
+
+
+if __name__ == "__main__":
+    pass

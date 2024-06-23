@@ -33,7 +33,7 @@ def cache3(func, label, filestem, file_extension):
             label, filestem, file_extension
         )
         if is_cached:
-            return cache_handler._get_intermediate_file_path(
+            return cache_handler.get_intermediate_file_path(
                 label, filestem, file_extension
             )
         else:
