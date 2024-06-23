@@ -17,6 +17,7 @@ def get_eurovision_rankings():
         constants.I3_PLAYLISTS_EUROVISION,
         "eurovisions",
         "json",
+        should_read_from_cache=False,
     )()
 
 

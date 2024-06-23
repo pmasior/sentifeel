@@ -38,6 +38,7 @@ def get_playlists_lyrics(playlists, playlists_name):
         constants.I7_PLAYLISTS_WITH_LYRICS,
         playlists_name,
         "json",
+        should_read_from_cache=False,
     )(playlists)
 
 

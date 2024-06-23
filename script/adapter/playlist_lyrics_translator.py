@@ -44,6 +44,7 @@ def get_playlists_translations(playlists, playlists_name):
         constants.IA_PLAYLISTS_WITH_TRANSLATIONS,
         playlists_name,
         "json",
+        should_read_from_cache=False,
     )(playlists)
 
 

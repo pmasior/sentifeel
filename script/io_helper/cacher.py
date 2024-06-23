@@ -4,13 +4,13 @@ from . import cache_handler
 from . import env_helper
 
 
-def cache2(func, label, filestem, file_extension):
+def cache2(func, label, filestem, file_extension, should_read_from_cache=True):
     def wrapper_cache2(*args, **kwargs):
         cache_handler.make_intermediate_directory(label)
         is_cached = cache_handler.check_existence_of_file(
             label, filestem, file_extension
         )
-        if is_cached:
+        if is_cached and should_read_from_cache:
             return cache_handler.open_from_intermediate_directory(
                 label, filestem, file_extension
             )

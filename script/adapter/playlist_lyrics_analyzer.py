@@ -56,6 +56,7 @@ def get_playlists_analysis(playlists, playlists_name):
         constants.IC_PLAYLISTS_WITH_ANALYSIS,
         playlists_name,
         "json",
+        should_read_from_cache=False,
     )(playlists)
 
 
