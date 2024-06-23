@@ -35,7 +35,7 @@ def get_data_for_eurovision_average_sentiment_by_year():
     return plot_data
 
 
-def _plot__eurovision_average_sentiment_by_year(plot_data):
+def _plot_eurovision_average_sentiment_by_year(plot_data):
     plot_data.plot(kind="line", marker="o", linestyle="-")
     plt.title("Average sentiment score in Eurovision songs over years")
     plt.xlabel("Year")
@@ -45,9 +45,9 @@ def _plot__eurovision_average_sentiment_by_year(plot_data):
     return plt.show()
 
 
-def plot__eurovision_average_sentiment_by_year():
+def plot_eurovision_average_sentiment_by_year():
     plot_data = get_data_for_eurovision_average_sentiment_by_year()
-    return _plot__eurovision_average_sentiment_by_year(plot_data)
+    return _plot_eurovision_average_sentiment_by_year(plot_data)
 
 
 if __name__ == "__main__":
