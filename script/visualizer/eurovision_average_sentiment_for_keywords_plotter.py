@@ -47,7 +47,9 @@ def _plot_average_sentiment_for_keywords(plot_data):
     plt.title("Average sentiment score for keywords in Eurovision songs over years")
     plt.xlabel("Year")
     plt.ylabel("Average sentiment score")
-    plt.legend(title="Keywords")
+    plt.legend(
+        title="Keywords", bbox_to_anchor=(0.5, -0.45), loc="lower center", ncols=6
+    )
     return plt.show()
 
 

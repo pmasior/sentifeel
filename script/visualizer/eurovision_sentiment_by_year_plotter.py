@@ -33,7 +33,16 @@ def get_data_for_eurovision_sentiment_by_year():
 
 
 def _plot_eurovision_sentiment_by_year(plot_data):
-    plot_data.plot(kind="bar", stacked=True)
+    plot_data.plot(
+        kind="bar",
+        stacked=True,
+        color={
+            "mixed": "orange",
+            "negative": "red",
+            "neutral": "grey",
+            "positive": "green",
+        },
+    )
     plt.title("Eurovision song sentiment over years")
     plt.xlabel("Year")
     plt.ylabel("Number of songs")

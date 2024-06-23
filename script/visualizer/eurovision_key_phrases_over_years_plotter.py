@@ -33,7 +33,7 @@ def get_data_for_key_phrases_over_years():
 
     def filter_pivot_table(plot_data):
         sum_of_every_row = _get_sum_of_every_row(plot_data)
-        filter_condition = sum_of_every_row > 2
+        filter_condition = sum_of_every_row > 42
         return plot_data[filter_condition]
 
     def sort_pivot_table(plot_data):
@@ -57,7 +57,7 @@ def _plot_key_phrases_over_years(plot_data):
     plt.xlabel("Key phrase")
     plt.ylabel("Frequency of key phrases")
     plt.xticks(rotation=45)
-    plt.legend(title="Year")
+    plt.legend(title="Year", bbox_to_anchor=(0.5, -0.45), loc="lower center", ncols=6)
     return plt.show()
 
 
