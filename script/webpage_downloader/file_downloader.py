@@ -56,4 +56,4 @@ def download_file(
 
 
 if __name__ == "__main__":
-    get_eurovision_analyze()
+    pass

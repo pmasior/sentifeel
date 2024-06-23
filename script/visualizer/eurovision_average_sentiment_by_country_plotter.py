@@ -2,6 +2,7 @@ import geopandas as gpd
 import matplotlib.pyplot as plt
 import pandas as pd
 
+from io_helper import terminal_printer
 from . import _country_code_mapper, _data_getter, _map_shapes_fetcher
 
 
@@ -39,6 +40,7 @@ def get_data_for_eurovision_average_sentiment_by_country():
 
     def get_contry_shapes():
         geo_data_path = _map_shapes_fetcher._fetch_and_extract_map_shapes()
+        terminal_printer.verbose_print(f"Opening {geo_data_path}")
         geo_data_in_epsg_4326 = gpd.read_file(geo_data_path)
         geo_data_for_europe = geo_data_in_epsg_4326.to_crs(epsg=3035)
         return geo_data_for_europe
