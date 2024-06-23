@@ -1,4 +1,4 @@
-from azure.ai.translation.text import InputTextItem, TranslatedTextItem
+from azure.ai.translation.text.models import InputTextItem, TranslatedTextItem
 from typing import TypedDict
 
 
