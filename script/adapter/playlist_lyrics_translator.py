@@ -24,7 +24,7 @@ def _get_playlist_translations(playlist: PlaylistWithLyrics) -> PlaylistWithLyri
 def _get_playlists_translations(playlists: PlaylistsWithLyrics) -> PlaylistsWithLyrics:
     playlists_with_translations = {}
     for playlist in playlists:
-        playlists_with_translations[playlist] = _get_playlist_translations(
+        playlists_with_translations[playlist] = get_playlist_translations(
             playlists[playlist]
         )
     return playlists_with_translations

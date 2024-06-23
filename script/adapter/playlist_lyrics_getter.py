@@ -25,7 +25,7 @@ def _get_playlist_lyrics(playlist: Playlist) -> PlaylistWithLyrics:
 def _get_playlists_lyrics(playlists: Playlists) -> PlaylistsWithLyrics:
     playlists_with_lyrics = {}
     for playlist in playlists:
-        playlists_with_lyrics[playlist] = _get_playlist_lyrics(playlists[playlist])
+        playlists_with_lyrics[playlist] = get_playlist_lyrics(playlists[playlist])
     return playlists_with_lyrics
 
 
