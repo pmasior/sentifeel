@@ -1,4 +1,4 @@
-from azure_connector import get_text_analytics_client
+from _azure_connector import get_text_analytics_client
 from type_defs import Documents
 
 
