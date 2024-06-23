@@ -6,35 +6,37 @@ from pathlib import Path
 from io_helper import terminal_printer
 
 
-def _get_current_datetime():
+def _get_current_datetime() -> str:
     return datetime.datetime.now(datetime.timezone.utc).strftime("%y%m%d.%H%M%S.%f")
 
 
-def _get_current_version():
+def _get_current_version() -> str:
     version_from_env = os.getenv("INTERMEDIATE_VERSION")
     return version_from_env if version_from_env else _get_current_datetime()
 
 
-def get_intermediate_path(label):
+def get_intermediate_path(label: str) -> Path:
     return Path.cwd() / "intermediate" / _get_current_version() / label
 
 
-def get_intermediate_file_path(label, filestem, file_extension):
+def get_intermediate_file_path(label: str, filestem: str, file_extension: str) -> Path:
     return get_intermediate_path(label) / f"{filestem}.{file_extension}"
 
 
-def make_intermediate_directory(label):
+def make_intermediate_directory(label: str) -> Path:
     path = get_intermediate_path(label)
     os.makedirs(path, exist_ok=True)
     return path
 
 
-def check_existence_of_file(label, filestem, file_extension):
+def check_existence_of_file(label: str, filestem: str, file_extension: str) -> bool:
     path = get_intermediate_file_path(label, filestem, file_extension)
     return path.exists()
 
 
-def open_from_intermediate_directory(label, filestem, file_extension):
+def open_from_intermediate_directory(
+    label: str, filestem: str, file_extension: str
+) -> Path:
     path = get_intermediate_file_path(label, filestem, file_extension)
     with open(path, "r", encoding="utf-8") as file:
         if file_extension == "json":
@@ -46,7 +48,9 @@ def open_from_intermediate_directory(label, filestem, file_extension):
     return content
 
 
-def save_to_intermediate_directory(content, label, filestem, file_extension):
+def save_to_intermediate_directory(
+    content: str, label: str, filestem: str, file_extension: str
+) -> Path:
     path = get_intermediate_file_path(label, filestem, file_extension)
     with open(path, "w", encoding="utf-8") as file:
         if file_extension == "json":

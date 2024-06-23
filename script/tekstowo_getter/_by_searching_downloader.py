@@ -6,8 +6,8 @@ from webpage_downloader import webpage_downloader
 from . import _by_song_id_downloader
 
 
-def _download_after_search(author, title):
-    def _get_song_id_from_search(html_content):
+def _download_after_search(author: str, title: str) -> str:
+    def _get_song_id_from_search(html_content: str) -> str | None:
         soup = BeautifulSoup(html_content, "lxml")
         selected_element = soup.select_one(".content .title")
         if selected_element is not None:

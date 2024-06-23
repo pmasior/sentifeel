@@ -1,7 +1,7 @@
 import re
 
 
-def _convert_string_to_tekstowo_format(string):
+def _convert_string_to_tekstowo_format(string: str) -> str:
     string_after_step1 = string.lower()
     string_after_step2 = re.sub(
         "[\u200b-\u200f\u202a-\u202e\u2060\ufeff]", "", string_after_step1
@@ -11,7 +11,7 @@ def _convert_string_to_tekstowo_format(string):
     return string_after_step4
 
 
-def create_lyrics_id(author, title):
+def create_lyrics_id(author: str, title: str) -> str:
     converted_author = _convert_string_to_tekstowo_format(author)
     converted_title = _convert_string_to_tekstowo_format(title)
     return f"{converted_author},{converted_title}"

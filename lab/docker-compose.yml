@@ -41,6 +41,21 @@ services:
         source: sentifeel-lab-pycache-text_translator
         target: /app/text_translator/__pycache__
       - type: volume
+        source: sentifeel-lab-pycache-type_defs
+        target: /app/type_defs/__pycache__
+      - type: volume
+        source: sentifeel-lab-pycache-type_defs-adapter
+        target: /app/type_defs/adapter/__pycache__
+      - type: volume
+        source: sentifeel-lab-pycache-type_defs-eurovision_getter
+        target: /app/type_defs/eurovision_getter/__pycache__
+      - type: volume
+        source: sentifeel-lab-pycache-type_defs-text_analyzer
+        target: /app/type_defs/text_analyzer/__pycache__
+      - type: volume
+        source: sentifeel-lab-pycache-type_defs-text_translator
+        target: /app/type_defs/text_translator/__pycache__
+      - type: volume
         source: sentifeel-lab-pycache-visualizer
         target: /app/visualizer/__pycache__
       - type: volume
@@ -62,6 +77,11 @@ volumes:
   sentifeel-lab-pycache-tekstowo_getter:
   sentifeel-lab-pycache-text_analyzer:
   sentifeel-lab-pycache-text_translator:
+  sentifeel-lab-pycache-type_defs:
+  sentifeel-lab-pycache-type_defs-adapter:
+  sentifeel-lab-pycache-type_defs-eurovision_getter:
+  sentifeel-lab-pycache-type_defs-text_analyzer:
+  sentifeel-lab-pycache-type_defs-text_translator:
   sentifeel-lab-pycache-visualizer:
   sentifeel-lab-pycache-webpage_downloader:
   sentifeel-lab-intermediate:

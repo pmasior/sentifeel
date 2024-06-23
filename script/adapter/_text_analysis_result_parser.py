@@ -1,7 +1,14 @@
-def parse_text_analysis_result(poller_results):
-    result = []
+from text_analyzer.text_analyzer import analyze_texts
+from type_defs.adapter.types import TextAnalysisParsed
+from type_defs.text_analyzer.types import AnalyzeTextsOutput
+
+
+def parse_text_analysis_result(
+    poller_results: AnalyzeTextsOutput,
+) -> list[TextAnalysisParsed]:
+    result: list[TextAnalysisParsed] = []
     for poller_result in poller_results:
-        action_converted_result = {}
+        action_converted_result: TextAnalysisParsed = {}
         for action_result in poller_result:
             action_converted_result["id"] = action_result.id
             if action_result.kind == "SentimentAnalysis":

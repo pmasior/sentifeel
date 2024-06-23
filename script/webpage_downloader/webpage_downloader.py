@@ -1,11 +1,12 @@
 import requests
 from selenium import webdriver
+from selenium.webdriver.firefox.webdriver import WebDriver
 from selenium.webdriver.firefox.options import Options
 
 from io_helper import terminal_printer
 
 
-def download_webpage(url):
+def download_webpage(url: str) -> str:
     with requests.get(url, timeout=10) as response:
         terminal_printer.verbose_print(f"Download {url}")
         webpage_content = response.content.decode("utf-8")
@@ -13,7 +14,7 @@ def download_webpage(url):
     return webpage_content
 
 
-def _get_headless_browser_driver():
+def _get_headless_browser_driver() -> WebDriver:
     options = Options()
     options.add_argument("--headless")
     driver = webdriver.Firefox(options=options)
@@ -23,11 +24,11 @@ def _get_headless_browser_driver():
     return driver
 
 
-def _close_headless_browser_driver(driver):
+def _close_headless_browser_driver(driver: WebDriver) -> None:
     driver.quit()
 
 
-def download_webpage_in_headless_browser(url):
+def download_webpage_in_headless_browser(url: str) -> str:
     driver = _get_headless_browser_driver()
     terminal_printer.verbose_print(f"Open Firefox and download {url}")
     driver.get(url)

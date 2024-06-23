@@ -1,9 +1,10 @@
 from eurovision_getter import _eurovision_ranking_downloader, _eurovision_ranking_parser
 from intermediate_constants import constants
 from io_helper import cacher
+from type_defs.eurovision_getter.types import RankingItem
 
 
-def get_eurovision_ranking(year):
+def get_eurovision_ranking(year: str) -> list[RankingItem]:
     html_content = cacher.cache_or_update(
         _eurovision_ranking_downloader.download_ranking_from_eurovision,
         constants.I1_EUROVISION_HTML,

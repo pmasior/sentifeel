@@ -1,11 +1,18 @@
-import functools
+from pathlib import Path
+from typing import Any, Callable, Dict
 
 from . import cache_handler
 from . import env_helper
 
 
-def cache2(func, label, filestem, file_extension, should_read_from_cache=True):
-    def wrapper_cache2(*args, **kwargs):
+def cache2(
+    func: Callable[..., Any],
+    label: str,
+    filestem: str,
+    file_extension: str,
+    should_read_from_cache: bool = True,
+) -> Callable[..., Any]:
+    def wrapper_cache2(*args: Any, **kwargs: Any) -> Any:
         cache_handler.make_intermediate_directory(label)
         is_cached = cache_handler.check_existence_of_file(
             label, filestem, file_extension
@@ -26,8 +33,10 @@ def cache2(func, label, filestem, file_extension, should_read_from_cache=True):
     return wrapper_cache2
 
 
-def cache3(func, label, filestem, file_extension):
-    def wrapper_cache3(*args, **kwargs):
+def cache3(
+    func: Callable[..., Path], label: str, filestem: str, file_extension: str
+) -> Callable[..., Path]:
+    def wrapper_cache3(*args: Any, **kwargs: Any) -> Path:
         cache_handler.make_intermediate_directory(label)
         is_cached = cache_handler.check_existence_of_file(
             label, filestem, file_extension
@@ -44,8 +53,14 @@ def cache3(func, label, filestem, file_extension):
     return wrapper_cache3
 
 
-def cache_or_update(func, label, filestem, file_extension, env_variable_name):
-    def wrapper_cache_or_update(*args, **kwargs):
+def cache_or_update(
+    func: Callable[..., str],
+    label: str,
+    filestem: str,
+    file_extension: str,
+    env_variable_name: str,
+) -> Callable[..., str]:
+    def wrapper_cache_or_update(*args: Any, **kwargs: Any) -> str:
         cache_handler.make_intermediate_directory(label)
         is_cached = cache_handler.check_existence_of_file(
             label, filestem, file_extension

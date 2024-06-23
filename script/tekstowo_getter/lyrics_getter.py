@@ -1,11 +1,11 @@
-import io_helper.cacher as cacher
 from intermediate_constants import constants
+from io_helper import cacher
 from . import _lyrics_id_creator
 from . import _lyrics_downloader
 from . import _lyrics_parser
 
 
-def get_lyrics(author, title):
+def get_lyrics(author: str, title: str) -> str:
     song_id = _lyrics_id_creator.create_lyrics_id(author, title)
 
     html_content = cacher.cache_or_update(

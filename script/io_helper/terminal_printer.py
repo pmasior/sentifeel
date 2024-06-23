@@ -1,7 +1,7 @@
 import os
 
 
-def verbose_print(text):
+def verbose_print(text: str) -> None:
     if "VERBOSE" in os.environ:
         if os.getenv("VERBOSE").lower() == "true":
             print(f"{Colors.BRIGHT_BLUE}sen: {Colors.RESET} {text}")

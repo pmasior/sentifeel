@@ -1,9 +1,10 @@
 from intermediate_constants import constants
 from io_helper import cacher, cache_handler
 from text_translator import text_translator
+from type_defs.adapter.types import PlaylistWithLyrics, PlaylistsWithLyrics
 
 
-def _get_playlist_translations(playlist):
+def _get_playlist_translations(playlist: PlaylistWithLyrics) -> PlaylistWithLyrics:
     cache_handler.make_intermediate_directory(constants.I8_TRANSLATIONS_TXT)
     songs_to_analyze = []
     for song in playlist:
@@ -20,7 +21,7 @@ def _get_playlist_translations(playlist):
     return playlist
 
 
-def _get_playlists_translations(playlists):
+def _get_playlists_translations(playlists: PlaylistsWithLyrics) -> PlaylistsWithLyrics:
     playlists_with_translations = {}
     for playlist in playlists:
         playlists_with_translations[playlist] = _get_playlist_translations(
@@ -29,7 +30,9 @@ def _get_playlists_translations(playlists):
     return playlists_with_translations
 
 
-def get_playlist_translations(playlist, playlist_name):
+def get_playlist_translations(
+    playlist: PlaylistWithLyrics, playlist_name: str
+) -> PlaylistWithLyrics:
     return cacher.cache2(
         _get_playlist_translations,
         constants.I9_PLAYLIST_WITH_TRANSLATIONS,
@@ -38,7 +41,9 @@ def get_playlist_translations(playlist, playlist_name):
     )(playlist)
 
 
-def get_playlists_translations(playlists, playlists_name):
+def get_playlists_translations(
+    playlists: PlaylistsWithLyrics, playlists_name: str
+) -> PlaylistsWithLyrics:
     return cacher.cache2(
         _get_playlists_translations,
         constants.IA_PLAYLISTS_WITH_TRANSLATIONS,
