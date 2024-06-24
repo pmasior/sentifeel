@@ -72,7 +72,7 @@ def _plot_eurovision_average_sentiment_by_country(plot_data):
         vmin=-1,
         vmax=1,
     )
-    plt.title("Average setinent score by country in Eurovision songs")
+    plt.title("Average sentinent score by country in Eurovision songs")
     ax.set_xlim([2500000, 6600000])
     ax.set_ylim([1300000, 5500000])
     ax.set_axis_off()
